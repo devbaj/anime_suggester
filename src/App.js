@@ -5,22 +5,92 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <GenreSelector></GenreSelector>
+      <TagSelector></TagSelector>
+      <MediumSelector></MediumSelector>
+      <TitleSelector></TitleSelector>
     </div>
   );
 }
+
+function Header() {
+  return(
+    <div className="Header">
+      THIS IS THE HEADER
+    </div>
+  )
+}
+
+class GenreSelector extends React.Component {
+
+  render() {
+    return (
+    <div>
+        <p>GenreSelector rendered</p>
+        <FilterableList></FilterableList>
+      </div>
+    )
+  }
+}
+
+class TagSelector extends React.Component {
+
+  render() {
+    return(
+      <div>
+        <p>TagSelector rendered</p>
+        <FilterableList></FilterableList>
+      </div>
+    )
+  }
+}
+
+class MediumSelector extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <p>MediumSelector rendered</p>
+        <FilterableList></FilterableList>
+      </div>
+    )
+  }
+}
+
+class TitleSelector extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <p>TitleSelector rendered</p>
+        <FilterableList></FilterableList>
+      </div>
+    )
+  }
+}
+
+class FilterableList extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <DynamicSearch></DynamicSearch>
+        <p>list goes here</p>
+      </div>
+    )
+  }
+}
+
+class DynamicSearch extends React.Component {
+
+  render() {
+    return (
+      <p>DynamicSearch rendered</p>
+    )
+  }
+}
+
+
 
 export default App;
