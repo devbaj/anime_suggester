@@ -39,12 +39,67 @@ class ApiHandler {
         })
       };
     return new Promise( resolve => {
-      fetch(url, options).then( res => {
-        var data = this.handleResponse(res);
-        resolve(data);
-      })
+      fetch(url, options)
+        .then( res => {
+          var data = this.handleResponse(res);
+          resolve(data);
+        })
         .catch(this.handleError);
     });
+  }
+
+  getGenres() {
+    var query = `
+    query {
+      GenreCollection
+    }
+    `;
+    var url = this.URL,
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          query: query
+        })
+      };
+    return new Promise(resolve => {
+      fetch(url, options)
+        .then(res => {
+          var data = this.handleResponse(res);
+          resolve(data);
+        })
+        .catch(this.handleError);
+    })
+  }
+
+  getTags() {
+    var query = `
+    query {
+      MediaListCollection
+    }
+    `;
+    var url = this.URL,
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          query: query
+        })
+      };
+    return new Promise(resolve => {
+      fetch(url, options)
+        .then(res => {
+          var data = this.handleResponse(res);
+          resolve(data);
+        })
+        .catch(this.handleError);
+    })
   }
 
   handleResponse(res) {

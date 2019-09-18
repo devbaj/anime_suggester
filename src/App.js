@@ -39,42 +39,47 @@ class GenreSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      title: null,
+      genres: null,
       loading: true,
     }
   }
 
   componentDidMount() {
-    this.props.api.testKey();
+    console.log('GenreSelector mounted succesfully')
     this.getGenreList();
   }
 
   async getGenreList() {
-    console.log('entered getGenreList');
-    this.state.info = await this.props.api.testRequest(820)
+    await this.props.api.getGenres()
       .then(res => {
-        this.setState({loading: false, data: res});
-        this.setState({title: res.data.Media.title.english});
-      });
-    console.log(this.state.title);
-  }
+        this.setState({loading: false, genres: res.data.GenreCollection})
+      })
+      .catch(err => console.error(err));
+    }
+
 
   renderList(data) {
+    console.log(data);
+    const genreList = data.map( (item, index) => {
+      return(
+        <li key={index}>{item}</li>
+      )
+    });
     return (
       <ul>
-        <li>{data}</li>
+        {genreList}
       </ul>
     );
   }
 
   render() {
-    const { loading, data } = this.state;
+    var loading = this.state.loading;
+    const genres = this.state.genres;
 
     return (
     <div>
         <p>GenreSelector rendered</p>
-        {loading ? "data loading" : this.renderList(this.state.title)}
+        {loading ? "Loading..." : this.renderList(genres)}
         <FilterableList></FilterableList>
       </div>
     )
@@ -82,6 +87,26 @@ class GenreSelector extends React.Component {
 }
 
 class TagSelector extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tags: null,
+      loading: true
+    }
+  }
+
+  componentDidMount() {
+    console.log('TagSelector mounted successfully');
+    this.getTagList();
+  }
+
+  async getTagList() {
+    await this.props.api.getTags()
+      .then(res => {
+        this.setState({loading: false, tags: res.data.TagCollection})
+      })
+      .catch(err => console.error(err));
+  }
 
   render() {
     return(
